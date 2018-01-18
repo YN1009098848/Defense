@@ -1,0 +1,28 @@
+{
+    "WaveList": [
+        {
+            "ID": "0",
+            "MonsterMod": "A",
+            "MonsterCount": 4,
+            "MonsterCreateTime": "2"
+        },
+        {
+            "ID": "1",
+            "MonsterMod": "B",
+            "MonsterCount": 3,
+            "MonsterCreateTime": "3"
+        },
+        {
+            "ID": "2",
+            "MonsterMod": "C",
+            "MonsterCount": 2,
+            "MonsterCreateTime": "4"
+        },
+        {
+            "ID": "3",
+            "MonsterMod": "A",
+            "MonsterCount": 1,
+            "MonsterCreateTime": "2"
+        }
+    ]
+}
