@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 public class RemMove : MonoBehaviour {
-    public float Speed = 4;//速度
+    private float Speed = 8;//速度
     public Text RemHpText;//血量提示
     public GameObject RemDieEffect;//Rem死亡动画
     public Slider RemHp;//血条

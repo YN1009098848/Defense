@@ -15,7 +15,7 @@ public class CameaContorl : MonoBehaviour
     public float distance;//向量长度
     public float scrollSpeed = 0.0001f;//拉近拉远的速度
     public GameObject startButton;//镜头归位
-    private float Speed = 0.5f;//滑动移动速度 
+    private float Speed = 0.3f;//滑动移动速度 
     public GameObject touchArea;//touchArea是点击区域
     private Vector2 OneClick;//初次点击位置
     private Vector2 OneClick1;
@@ -35,13 +35,14 @@ public class CameaContorl : MonoBehaviour
     public float minDistance = 5f;
 
     //缩放系数  
-    public float scaleFactor = 0.001f;
+    public float scaleFactor = 0.00001f;
     private Vector2 lastSingleTouchPosition;
     private Vector3 velocity = Vector3.zero;
 
     public GameObject ZoomButton;
-
+    public bool IsZoomStop;
     public bool IsZoomButton;
+    public Vector3 TouchCameraPos;
     public Vector3 CameraPos;
     void Start()
     {
@@ -69,24 +70,22 @@ public class CameaContorl : MonoBehaviour
                     Vector3 mPos = new Vector3(position.x, position.y, position.z);
                     transform.position = Vector3.SmoothDamp(transform.position, mPos, ref velocity, 0.05f);
                 }
-                if (!IsZoomButton && !mIsDraging && !IsMoveCamera)
+                if (!IsZoomButton && !mIsDraging && !IsMoveCamera)//点击缩放按钮，放大
                 {
                     Vector3 position = offsetPosition + player.position;
                     transform.position = Vector3.SmoothDamp(transform.position, position, ref velocity, 1f);
+                    startCamear();
                 }
-                if (IsZoomButton && !mIsDraging && !IsMoveCamera)
+                if (IsZoomButton && !mIsDraging && !IsMoveCamera)//点击缩放按钮，缩小
                 {
                     mIsDraging = false;
                     misZoomCamera = true;
-                    Vector3 position = new Vector3(transform.position.x, 100, 0);
-                    transform.position = Vector3.SmoothDamp(transform.position, position, ref velocity, 1f);
-
+                    Vector3 position = transform.forward *-100;
+                    //Debug.Log("position:" + position);
+                    CameraPos = position + player.position;
+                    transform.position = Vector3.SmoothDamp(transform.position, CameraPos, ref velocity, 0.5f);
                 }
             }
-            
-            Debug.Log("mIsDraging:" + mIsDraging);
-            Debug.Log("IsZoomButton:" + IsZoomButton);
-            Debug.Log("IsMoveCamera:" + IsMoveCamera);
         }
 
     }
@@ -95,16 +94,24 @@ public class CameaContorl : MonoBehaviour
         //移动
         if (mIsDraging && action.id == InputActionID.IA_ONEPOINT_DRAG && IsMoveCamera)
         {
-            IsMoveCamera = true;
-            IA_OnePointDrag act = (IA_OnePointDrag)action;
-            Vector2 clickPos = new Vector2(act.pos.x, act.pos.y);//点击动作发生的点的坐标
-            Vector3 deltaVec = new Vector3(clickPos.x - OneClick.x, 0, clickPos.y - OneClick.y);
-            Vector3 tarVec = deltaVec * Speed;
-            
-            transform.localPosition=tarVec+CameraPos;
-            //transform.Translate(tarVec, Space.World);//?
-            // Debug.Log(tarVec + "---------xxxx");
-            // Debug.Log(transform.localPosition + "");
+            if (misZoomCamera && !IsZoomButton)
+            {
+                return;
+            }
+            else
+            {
+                IsMoveCamera = true;
+                IA_OnePointDrag act = (IA_OnePointDrag)action;
+                Vector2 clickPos = new Vector2(act.pos.x, act.pos.y);//点击动作发生的点的坐标
+                Vector3 deltaVec = new Vector3(clickPos.x - OneClick.x, 0, clickPos.y - OneClick.y);
+                Vector3 tarVec = deltaVec * Speed;
+                transform.localPosition = tarVec + TouchCameraPos;
+                //transform.Translate(tarVec, Space.World);//?
+                // Debug.Log(tarVec + "---------xxxx");
+                // Debug.Log(transform.localPosition + "");
+
+            }
+
         }
         else if (mIsDraging && action.id == InputActionID.IA_ONEPOINT_CLICK)
         {
@@ -120,7 +127,7 @@ public class CameaContorl : MonoBehaviour
             }
             else
             {
-                CameraPos = this.transform.localPosition;
+                TouchCameraPos = this.transform.localPosition;
                 Debug.Log("点击坐标："+act.pos);
                 IsMoveCamera = true;
                 OneClick = act.pos;
@@ -135,30 +142,23 @@ public class CameaContorl : MonoBehaviour
             IsMoveCamera = false;
         }
         //缩放
-        if (misZoomCamera && action.id == InputActionID.IA_TWOPOINT_DRAG)
+        if (!IsZoomButton&& misZoomCamera && action.id == InputActionID.IA_TWOPOINT_DRAG)
         {
             mIsDraging = true;
             IA_TwoPointDrag act = (IA_TwoPointDrag)action;
             //计算出当前两点触摸点的位置  
             Vector2 tempPosition1 = new Vector2(act.pos0.x, act.pos0.y);
             Vector2 tempPosition2 = new Vector2(act.pos1.x, act.pos1.y);
+
             float currentTouchDistance = Vector3.Distance(tempPosition1, tempPosition2);
             float lastTouchDistance = Vector3.Distance(OneClick1, OneClick2);
             //计算上次和这次双指触摸之间的距离差距  
             //然后去更改摄像机的距离  
-            distance -= (currentTouchDistance - lastTouchDistance) * scaleFactor * Time.deltaTime;
+            distance -= (currentTouchDistance - lastTouchDistance) * scaleFactor;
             //把距离限制住在min和max之间  
             distance = Mathf.Clamp(distance, minDistance, maxDistance);
-            Vector3 position = transform.up * -distance;
-            Vector3 mPosition = new Vector3(0, Mathf.Clamp(position.y, 30, 100), 0);
-            if (transform.position.y >= 100)
-            {
-                transform.position = new Vector3(0, 100, 0);
-            }
-            else
-            {
-                transform.localPosition=transform.forward+ mPosition;
-            }
+            Vector3 position = transform.forward * -distance;
+            transform.localPosition= position + player.position;
             //Debug.Log("mPosition:" + mPosition);
             //Debug.Log("POS:" + transform.position);
             
@@ -182,8 +182,13 @@ public class CameaContorl : MonoBehaviour
         }
         else if (action.id == InputActionID.IA_TWOPOINT_DRAG_EXIT)
         {
+            
             IA_TwoPointDragExit act = (IA_TwoPointDragExit)action;
             mIsDraging = false;
+            misZoomCamera = false;
+            OneClick1 = act.pos0;
+            OneClick2 = act.pos1;
+            startCamear();
         }
     }
 

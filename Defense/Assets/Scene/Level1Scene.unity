@@ -717,7 +717,7 @@ RectTransform:
   m_GameObject: {fileID: 172686721}
   m_LocalRotation: {x: 0.47776446, y: -0.01203116, z: -0.011902922, w: 0.878325}
   m_LocalPosition: {x: 1.3891876, y: -53.89785, z: 34.819275}
-  m_LocalScale: {x: 0.113401495, y: 0.113401495, z: 0.113401495}
+  m_LocalScale: {x: 0.11390625, y: 0.11390625, z: 0.11390625}
   m_Children:
   - {fileID: 465267144}
   m_Father: {fileID: 0}
@@ -1184,7 +1184,7 @@ GameObject:
   - component: {fileID: 465267147}
   - component: {fileID: 465267146}
   - component: {fileID: 465267145}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: TouchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1905,12 +1905,12 @@ Prefab:
     - target: {fileID: 224471968862910436, guid: 5e60fe19fd126704d9705e5d1042fd91,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 224471968862910436, guid: 5e60fe19fd126704d9705e5d1042fd91,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 114777364241200112, guid: 5e60fe19fd126704d9705e5d1042fd91,
         type: 2}
@@ -2001,7 +2001,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1053617667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1059.9882, y: 79, z: 0}
+  m_LocalPosition: {x: 967.0682, y: 79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 118886010}
@@ -2138,7 +2138,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1071868622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 495.98816, y: 439, z: 0}
+  m_LocalPosition: {x: 403.06818, y: 439, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 870998463}
@@ -2914,7 +2914,9 @@ MonoBehaviour:
   minDistance: 30
   scaleFactor: 1
   ZoomButton: {fileID: 1071868622}
+  IsZoomStop: 0
   IsZoomButton: 0
+  TouchCameraPos: {x: 0, y: 0, z: 0}
   CameraPos: {x: 0, y: 0, z: 0}
 --- !u!54 &1436852407
 Rigidbody:
@@ -4114,8 +4116,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2095317317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 679.5, y: 338.5, z: 0}
-  m_LocalScale: {x: 0.62685186, y: 0.62685186, z: 0.62685186}
+  m_LocalPosition: {x: 618.5, y: 337, z: 0}
+  m_LocalScale: {x: 0.6240741, y: 0.6240741, z: 0.6240741}
   m_Children:
   - {fileID: 409300293}
   - {fileID: 330142578}

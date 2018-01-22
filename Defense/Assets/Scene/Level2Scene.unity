@@ -194,8 +194,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 10982484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 679.5, y: 338.5, z: 0}
-  m_LocalScale: {x: 0.62685186, y: 0.62685186, z: 0.62685186}
+  m_LocalPosition: {x: 618.5, y: 337, z: 0}
+  m_LocalScale: {x: 0.6240741, y: 0.6240741, z: 0.6240741}
   m_Children:
   - {fileID: 332691060}
   - {fileID: 1251076167}
@@ -513,7 +513,10 @@ MonoBehaviour:
   minDistance: 30
   scaleFactor: 1
   ZoomButton: {fileID: 796337795}
+  IsZoomStop: 0
   IsZoomButton: 0
+  TouchCameraPos: {x: 0, y: 0, z: 0}
+  CameraPos: {x: 0, y: 0, z: 0}
 --- !u!54 &111992559
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1004,7 +1007,7 @@ RectTransform:
   m_GameObject: {fileID: 384679316}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 4.64, y: -40.71068, z: 51.210686}
-  m_LocalScale: {x: 0.113401495, y: 0.113401495, z: 0.113401495}
+  m_LocalScale: {x: 0.11390625, y: 0.11390625, z: 0.11390625}
   m_Children:
   - {fileID: 1575925254}
   m_Father: {fileID: 0}
@@ -1325,7 +1328,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 486327055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1059.9882, y: 79, z: 0}
+  m_LocalPosition: {x: 967.0682, y: 79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 858212553}
@@ -2327,7 +2330,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 796337795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 495.98816, y: 439, z: 0}
+  m_LocalPosition: {x: 403.06818, y: 439, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 203503327}
@@ -3221,12 +3224,12 @@ Prefab:
     - target: {fileID: 224471968862910436, guid: 5e60fe19fd126704d9705e5d1042fd91,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 224471968862910436, guid: 5e60fe19fd126704d9705e5d1042fd91,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e60fe19fd126704d9705e5d1042fd91, type: 2}
@@ -3790,7 +3793,7 @@ GameObject:
   - component: {fileID: 1575925257}
   - component: {fileID: 1575925256}
   - component: {fileID: 1575925255}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: TouchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
